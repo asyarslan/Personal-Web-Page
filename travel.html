@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asya Arslan - Travel Map</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load OpenLayers CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+    
+    <!-- Custom styles for the carousel -->
+    <style>
+        .carousel-wrapper {
+            transition: transform 0.5s ease-in-out;
+            height: 100%; /* Resimlerin yüksekliğini korur */
+        }
+        .carousel-wrapper img {
+            /* DÜZELTME: Wrapper 300% genişlikte olduğundan, her resmin wrapper'ın 1/3'ü kadar (yani görünür alanın %100'ü) genişliğe sahip olmasını sağlar. */
+            width: calc(100% / 3); 
+            height: 100%; /* Container yüksekliğini doldurmasını sağlar */
+            object-fit: cover; 
+        }
+        /* Okları biraz daha büyük ve kolay tıklanır hale getirir */
+        .carousel-prev, .carousel-next {
+            padding: 0.6rem; 
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="text-xl font-bold text-white hover:text-indigo-400 transition duration-300">ASYA ARSLAN</a>
+                <div class="flex space-x-4">
+                    <a href="index.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300">About Me</a>
+                    <a href="experience.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300">Experience</a>
+                    <a href="projects.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300">Projects</a>
+                    <a href="travel.html" class="nav-link active bg-indigo-600 text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300">Travel Map</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 4. TRAVEL MAP SECTION -->
+    <main class="pt-24 pb-12 max-w-7xl mx-auto px-6 lg:px-8">
+        <section id="travel">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">My Travel Adventures</h1>
+                
+                <!-- OpenLayers Map Container -->
+                <div id="map" class="mb-12 shadow-xl" style="height: 60vh; min-height: 400px; width: 100%; border-radius: 1rem;"></div>
+
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1: Belgrade (Carousel) -->
+                    <div id="belgrade-card" data-coords="20.46,44.82" class="destination-card bg-white rounded-xl shadow-lg p-6 hover:shadow-indigo-300 transition duration-300 border-t-4 border-indigo-500">
+                        
+                        <!-- CAROUSEL CONTAINER (h-48 -> h-64 olarak güncellendi) -->
+                        <div class="carousel-container relative overflow-hidden rounded-lg mb-4 h-64">
+                            <div class="carousel-wrapper flex flex-nowrap" style="width: 300%;">
+                                <!-- Image 1/3 -->
+                                <img 
+                                    src="img/belgrad1.jpg" 
+                                    alt="Belgrade Photo 1" 
+                                    class="object-cover flex-shrink-0"
+                                >
+                                <!-- Image 2/3 -->
+                                <img 
+                                    src="img/belgrad2.jpg" 
+                                    alt="Belgrade Photo 2" 
+                                    class="object-cover flex-shrink-0"
+                                >
+                                <!-- Image 3/3 -->
+                                <img 
+                                    src="img/belgrad3.jpg" 
+                                    alt="Belgrade Photo 3" 
+                                    class="object-cover flex-shrink-0"
+                                >
+                                
+                            </div>
+                            
+                            <button class="carousel-prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition z-20 text-xs font-bold" aria-label="Previous Image">&lt;</button>
+                            <button class="carousel-next absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition z-20 text-xs font-bold" aria-label="Next Image">&gt;</button>
+                        </div>
+                        
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">Belgrade, Serbia</h2>
+                        
+                        <button class="view-on-map mt-4 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition duration-300 focus:outline-none w-full text-center py-2 bg-indigo-50 rounded-lg hover:bg-indigo-100">View on Map &rarr;</button>
+                    </div>
+
+                    <!-- Card 2: Sarajevo  -->
+                    <div id="sarajevo-card" data-coords="18.41,43.85" class="destination-card bg-white rounded-xl shadow-lg p-6 hover:shadow-indigo-300 transition duration-300 border-t-4 border-indigo-500">
+                        
+                        <!-- CAROUSEL CONTAINER (h-48 -> h-64 olarak güncellendi) -->
+                        <div class="carousel-container relative overflow-hidden rounded-lg mb-4 h-64">
+                            <div class="carousel-wrapper flex flex-nowrap" style="width: 300%;">
+                                <!-- Image 1/3 -->
+                                <img 
+                                    src="img/bosna1.jpg" 
+                                    alt="Sarajevo Photo 1" 
+                                    class="object-cover flex-shrink-0"
+                                >
+                                <!-- Image 2/3 -->
+                                <img 
+                                    src="img/bosna2.jpg" 
+                                    alt="Sarajevo Photo 2" 
+                                    class="object-cover flex-shrink-0"
+                                >
+                                <!-- Image 3/3 -->
+                                <img 
+                                    src="img/bosna3.jpg" 
+                                    alt="Sarajevo Photo 3" 
+                                    class="object-cover flex-shrink-0"
+                                >
+                                
+                            </div>
+                            <!-- Controls -->
+                            <button class="carousel-prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition z-20 text-xs font-bold" aria-label="Previous Image">&lt;</button>
+                            <button class="carousel-next absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition z-20 text-xs font-bold" aria-label="Next Image">&gt;</button>
+                        </div>
+                        
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">Sarajevo, Bosnia and Herzegovina</h2>
+                    
+                        <button class="view-on-map mt-4 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition duration-300 focus:outline-none w-full text-center py-2 bg-indigo-50 rounded-lg hover:bg-indigo-100">View on Map &rarr;</button>
+                    </div>
+
+                    <!-- Card 3: Skopje (Carousel) -->
+                    <div id="skopje-card" data-coords="21.43,42.00" class="destination-card bg-white rounded-xl shadow-lg p-6 hover:shadow-indigo-300 transition duration-300 border-t-4 border-indigo-500">
+                        
+                        
+                        <!-- CAROUSEL CONTAINER (h-48 -> h-64 olarak güncellendi) -->
+                        <div class="carousel-container relative overflow-hidden rounded-lg mb-4 h-64">
+                            <div class="carousel-wrapper flex flex-nowrap" style="width: 300%;">
+                                <!-- Image 1/3 -->
+                                <img 
+                                    src="img/uskup1.jpg" 
+                                    alt="Skopje Photo 1" 
+                                    class="object-cover flex-shrink-0"
+                                >
+                                <!-- Image 2/3 -->
+                                <img 
+                                    src="img/uskup2.jpg" 
+                                    alt="Skopje Photo 2" 
+                                    class="object-cover flex-shrink-0"
+                                >
+                                <!-- Image 3/3 -->
+                                <img 
+                                    src="img/uskup3.jpg" 
+                                    alt="Skopje Photo 3" 
+                                    class="object-cover flex-shrink-0"
+                                >
+                            
+                            </div>
+                            <!-- Controls -->
+                            <button class="carousel-prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition z-20 text-xs font-bold" aria-label="Previous Image">&lt;</button>
+                            <button class="carousel-next absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60 transition z-20 text-xs font-bold" aria-label="Next Image">&gt;</button>
+                        </div>
+                        
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">Skopje, North Macedonia</h2>
+
+                        <button class="view-on-map mt-4 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition duration-300 focus:outline-none w-full text-center py-2 bg-indigo-50 rounded-lg hover:bg-indigo-100">View on Map &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // OpenLayers Global Variables
+        let map = null;
+        let view = null;
+        const Map = ol.Map;
+        const View = ol.View;
+        const TileLayer = ol.layer.Tile;
+        const OSM = ol.source.OSM;
+        const fromLonLat = ol.proj.fromLonLat;
+
+        /**
+         * Haritada belirtilen konuma animasyonlu kaydırma yapar ve yakınlaştırır.
+         * @param {number} lon Boylam
+         * @param {number} lat Enlem
+         */
+        function panToLocation(lon, lat) {
+            const center = fromLonLat([lon, lat]);
+            view.animate({
+                center: center,
+                duration: 1500,
+                zoom: 10
+            });
+        }
+
+        /**
+         * Haritayı başlatır ve OpenStreetMap temel katmanını ekler.
+         */
+        function initializeMap() {
+            const mapElement = document.getElementById('map');
+            // ol objesinin yüklenip yüklenmediğini ve harita elementinin varlığını kontrol et
+            if (typeof ol === 'undefined' || !mapElement || map) return;
+
+            view = new View({
+                center: fromLonLat([19.5, 43.5]), // Merkezi Balkan konumu
+                zoom: 6
+            });
+
+            map = new Map({
+                target: 'map',
+                layers: [
+                    new TileLayer({
+                        source: new OSM() // OpenStreetMap temel katmanı
+                    })
+                ],
+                view: view
+            });
+            
+            setupEventListeners();
+            setupCarousels(); // Yeni karusel mantığını burada başlatıyoruz
+        }
+        
+        /**
+         * Harita için kart tıklama olaylarını ayarlar.
+         */
+        function setupEventListeners() {
+            const cards = document.querySelectorAll('.destination-card');
+            cards.forEach(card => {
+                // Haritada göster düğmesine tıklama olayını dinler
+                const viewButton = card.querySelector('.view-on-map');
+                if (viewButton) {
+                    viewButton.onclick = function(e) {
+                        e.preventDefault();
+                        e.stopPropagation(); // Kartın tıklama olayını engelle
+                        const coordsString = card.getAttribute('data-coords');
+                        if (coordsString) {
+                            const [lon, lat] = coordsString.split(',').map(c => parseFloat(c.trim()));
+                            panToLocation(lon, lat);
+                        }
+                    };
+                }
+            });
+        }
+
+        /**
+         * Her bir destinasyon kartındaki resim karusellerini ayarlar.
+         */
+        function setupCarousels() {
+            document.querySelectorAll('.destination-card').forEach(card => {
+                const wrapper = card.querySelector('.carousel-wrapper');
+                const images = wrapper.querySelectorAll('img');
+                const prevButton = card.querySelector('.carousel-prev');
+                const nextButton = card.querySelector('.carousel-next');
+
+                if (images.length === 0 || !wrapper || !prevButton || !nextButton) return;
+
+                let currentIndex = 0;
+                const totalImages = images.length;
+
+                // Wrapper'ın genişliğini toplam resim sayısına göre ayarlar (3 resim için %300)
+                wrapper.style.width = `${totalImages * 100}%`;
+
+                function updateCarousel() {
+                    // Mevcut resmin pozisyonuna göre transform hesaplar (0%, -100%, -200%...)
+                    const offset = -currentIndex * (100 / totalImages);
+                    wrapper.style.transform = `translateX(${offset}%)`;
+                }
+
+                prevButton.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Kart tıklama olayını önler
+                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalImages - 1; // Döngüsel geri sar
+                    updateCarousel();
+                });
+
+                nextButton.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Kart tıklama olayını önler
+                    currentIndex = (currentIndex < totalImages - 1) ? currentIndex + 1 : 0; // Döngüsel ileri sar
+                    updateCarousel();
+                });
+            });
+        }
+
+        // Sayfa yüklendiğinde haritayı başlat
+        window.onload = initializeMap;
+    </script>
+</body>
+</html>
