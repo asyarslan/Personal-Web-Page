@@ -1,8 +1,8 @@
-GMK 654 - Web GIS & LBS | Personal Web Page
+###GMK 654 - Web GIS & LBS | Personal Web Page
 
 This project is the outcome of the assignment within the GMK 654 - Web GIS & LBS course, aimed at enabling students to create their personal web pages using HTML, CSS, and the OpenLayers library for Geographic Information Systems (GIS). The project presents personal experiences, projects, and travel information via an interactive map.
 
-Project Goal and Features
+##Project Goal and Features
 
 This website is designed to achieve the following main objectives:
 
@@ -12,7 +12,7 @@ Web GIS Application: To present an interactive travel map (Travel Map) showing t
 
 Technological Compliance: The project has been developed using at least three different HTML files (index.html, experience.html, projects.html, travel.html, etc.), in accordance with the assignment requirements.
 
-Technologies Used
+##Technologies Used
 
 The main technologies used in the development of the project are:
 
@@ -24,7 +24,7 @@ JavaScript (Vanilla JS): Used to manage the Carousel (Slider) logic and OpenLaye
 
 OpenLayers (ol): Used in the Travel Map page to display the geographic locations of visited cities (Belgrade, Sarajevo, Skopje) and to provide pan/zoom functionality on the map.
 
-Travel Map Features
+##Travel Map Features
 
 The travel.html page includes the following interactive features:
 
@@ -34,14 +34,11 @@ Image Carousels: Slider cards displaying multiple photos for each city (Belgrade
 
 View on Map Functionality: When the button on the card is clicked, the map automatically and dynamically focuses on the relevant city center.
 
-Artificial Intelligence (AI) Usage
+##Artificial Intelligence (AI) Usage
 
 As required by the assignment instructions, assistance from AI tools (e.g., Gemini) was utilized during the development of this project.
 
 The primary area where AI assistance was sought was Web GIS and Visualization Integration. This involved using AI to gain knowledge and learn the correct implementation methods for key components:
 
-OpenLayers Integration: Defining and using core functions like ol.Map, ol.View, and ol.proj.fromLonLat to set up the interactive travel map.
-
-CSS Visualization and Animation: Learning the implementation of CSS-based visualization techniques, specifically for creating the image carousels and their responsive animations (using transition and transform).
-
-Documentation: AI also assisted in preparing this professional and complete README.md file in accordance with the project requirements.
+OpenLayers Integration
+CSS Visualization and Animation
