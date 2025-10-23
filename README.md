@@ -1,4 +1,5 @@
 # GMK 654 - Web GIS & LBS | Personal Web Page
+# Asya Arslan N25123148
 
 This project is the outcome of the assignment within the GMK 654 - Web GIS & LBS course, aimed at enabling students to create their personal web pages using HTML, CSS, and the OpenLayers library for Geographic Information Systems (GIS). The project presents personal experiences, projects, and travel information via an interactive map.
 
