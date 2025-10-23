@@ -43,3 +43,5 @@ The primary area where AI assistance was sought was Web GIS and Visualization In
 
 -OpenLayers Integration 
 -CSS Visualization and Animation
+
+AI usage in terms of minutes or hours: 1 hours
